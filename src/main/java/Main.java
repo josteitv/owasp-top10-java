@@ -44,6 +44,7 @@ public class Main {
 
         servletHandler.addServlet(SecureServlet.class, "/secure/*");
         servletHandler.addServlet(MoneyTransferServlet.class, "/secure/transfer.html");
+        servletHandler.addServlet(TodoServlet.class, "/secure/todo.html");
         servletHandler.addServlet(LoginServlet.class, "/login");
         servletHandler.addServlet(LogoutServlet.class, "/logout");
         servletHandler.addServlet(SearchServlet.class, "/search.html");
