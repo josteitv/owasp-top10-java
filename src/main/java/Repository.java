@@ -249,13 +249,14 @@ public class Repository {
 
     }
 
-    public static void deleteTodoItem(String id) {
-        String sql = "delete from TODO_ITEM where id = ?";
+    public static void deleteTodoItem(String id, String user) {
+        String sql = "delete from TODO_ITEM where id = ? and user = ?";
 
         Connection connection = getDBConnection();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, id);
+            ps.setString(2, user);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -20,6 +20,8 @@ public class TodoServlet extends HttpServlet {
         String todo = request.getParameter("todo");
         String delete = request.getParameter("delete");
 
+        // UTF8-problem i chrome...
+        // String html = "<h2>TODO for bruker '" + user + "'</h2>";
         String html = "<h2>TODO</h2>";
 
         String todoText = "";
@@ -27,7 +29,7 @@ public class TodoServlet extends HttpServlet {
 
         if (!isNullOrEmpty(id) && !isNullOrEmpty(delete)) {
             // Delete todo item
-            Repository.deleteTodoItem(id);
+            Repository.deleteTodoItem(id, user);
 
         } else if (!isNullOrEmpty(id) && isNullOrEmpty(todo)) {
             // View todo item
