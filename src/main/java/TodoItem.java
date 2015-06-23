@@ -1,4 +1,3 @@
-
 public class TodoItem {
 
     private final String id;
@@ -26,5 +25,5 @@ public class TodoItem {
     public String getTodo() {
         return todo;
     }
-    
+
 }

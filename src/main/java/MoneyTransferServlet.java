@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 public class MoneyTransferServlet extends HttpServlet {
 
     @Override
@@ -17,11 +16,10 @@ public class MoneyTransferServlet extends HttpServlet {
         String to = request.getParameter("to");
         String amount = request.getParameter("amount");
 
-        
         String user = request.getUserPrincipal().getName();
 
         String currentAmount = Repository.getAmount(user);
-        
+
         String content = "<form method='GET' action='/secure/transfer.html' "
                 + "class='form-horizontal col-md-offset-4 col-lg-offset-4 col-xs-offset-4 col-md-4 col-lg-4 col-xs-4'>"
                 + "<div class='form-group'>"
@@ -41,14 +39,12 @@ public class MoneyTransferServlet extends HttpServlet {
                 + "<button type='submit' class='btn btn-primary pull-right'>Transfer money</button>"
                 + "</form>"
                 + "You have " + currentAmount + " dollars";
-        
-        if (from != null && !from.isEmpty() && to != null && !to.isEmpty() && amount != null && !amount.isEmpty()) {
-            Repository.transferMoney(from, to, amount);
-            content += "<p>"+ amount + " transfered from " + from + " to " + to + "</p>";
-        }
-        
 
-        
+        if (from != null && !from.isEmpty() && to != null && !to.isEmpty() && amount != null && !amount.isEmpty()) {
+            // TODO:
+            // Repository.transferMoney(from, to, amount);
+            content += "<p>" + amount + " transfered from " + from + " to " + to + "</p>";
+        }
 
         response.getWriter().println(Html.html(content));
     }

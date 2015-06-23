@@ -69,9 +69,17 @@ public class Repository {
         }
     }
 
+    private static Connection getDBConnection() {
+        try {
+            Class.forName(DB_DRIVER);
+            return DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static boolean login(String username, String password) {
         String sql = "select * from LOGIN where username = '" + username + "' and password='" + password + "'";
-        // String sql = "select * from LOGIN where username = ? and password=?";
 
         log.info("Executing sql: " + sql);
 
@@ -79,11 +87,6 @@ public class Repository {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-
-            // PreparedStatement ps = connection.prepareStatement(sql);
-            // ps.setString(1, username);
-            // ps.setString(2, password);
-            // ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 return true;
@@ -101,19 +104,6 @@ public class Repository {
                 // ignore
             }
         }
-    }
-
-    private static Connection getDBConnection() {
-        try {
-            Class.forName(DB_DRIVER);
-            return DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static void transferMoney(String from, String to, String amount) {
-        // TODO
     }
 
     public static String getAmount(String username) {
