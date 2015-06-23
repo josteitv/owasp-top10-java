@@ -5,6 +5,7 @@ import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.authentication.FormAuthenticator;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.ErrorHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -26,6 +27,12 @@ public class Main {
                 createServletContextHandler()
         });
         server.setHandler(handlers);
+
+        // Display stack traces
+        ErrorHandler errorHandler = new ErrorHandler();
+        errorHandler.setServer(server);
+        errorHandler.setShowStacks(true);
+        server.addBean(errorHandler);
 
         Repository.createDatabase();
 
