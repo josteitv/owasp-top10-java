@@ -55,7 +55,7 @@ public class TodoServlet extends HttpServlet {
                 + "<div class='form-group'>"
                 + "  <input type='hidden' name='id' value='" + idText + "' />"
                 + "  <div class='col-md-11'>"
-                + "    <input type='text' class='form-control' name='todo' placeholder='Add TODO' value='" + todoText + "'>"
+                + "    <input type='text' class='form-control' name='todo' placeholder='Add task' value='" + todoText + "'>"
                 + "  </div>"
                 + "<div class='col-md-1'>"
                 + "  <button type='submit' class='btn btn-primary pull-right'>Save</button>"
