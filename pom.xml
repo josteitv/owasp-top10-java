@@ -64,6 +64,9 @@
         </configuration>
       </plugin>
 
+      <!-- Disabled, so JRE can be removed from repository.
+      TODO: Find a way to include a JRE without having it checked in to git repo
+      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
@@ -83,7 +86,6 @@
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>2.5.4</version>
@@ -102,9 +104,9 @@
             </goals>
           </execution>
         </executions>
-
       </plugin>
-
+     -->
+     
     </plugins>
   </build>
 
