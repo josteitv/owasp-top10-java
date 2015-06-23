@@ -20,8 +20,7 @@ public class TodoServlet extends HttpServlet {
         String todo = request.getParameter("todo");
         String delete = request.getParameter("delete");
 
-        String html = "<h2>TODO</h2>";
-
+        String html = "";
         String todoText = "";
         String idText = "";
 
@@ -42,40 +41,37 @@ public class TodoServlet extends HttpServlet {
         } else if (!isNullOrEmpty(id) && !isNullOrEmpty(todo)) {
             // Update todo item
             Repository.updateTodoItem(new TodoItem(id, user, todo));
-            todoText = escapeHtml4(todo);
-            idText = id;
         }
 
-        html += "<div class='container'>"
-                + "<form method='GET' action='/secure/todo.html' "
-                + "class='form-horizontal '>"
-                + "<div class='form-group'>"
-                + "  <input type='hidden' name='id' value='" + idText + "' />"
-                + "  <div class='col-lg-10'>"
-                + "    <textarea class='form-control' rows='5' name='todo'>"
-                + todoText
-                + "    </textarea>"
+        html += ""
+                + "<div class='container'>"
+                + "  <div class='col-md-12'>"
+                + "    <h2>TODO list</h2>"
                 + "  </div>"
-                + "</div>"
-                + "<button type='submit' class='btn btn-primary pull-right'>Save</button>"
-                + "</form>"
                 + "</div>";
 
         html += "<div class='container'>"
-                + "<div class='col-lg-10'>"
-                + "<a href='/secure/todo.html'>"
-                + "&lt;create new item&gt;"
-                + "</a>"
+                + "<form method='GET' action='/secure/todo.html' class='form-horizontal '>"
+                + "<div class='form-group'>"
+                + "  <input type='hidden' name='id' value='" + idText + "' />"
+                + "  <div class='col-md-11'>"
+                + "    <input type='text' class='form-control' name='todo' placeholder='Add TODO' value='" + todoText + "'>"
+                + "  </div>"
+                + "<div class='col-md-1'>"
+                + "  <button type='submit' class='btn btn-primary pull-right'>Save</button>"
                 + "</div>"
+                + "</div>"
+                + "</form>"
                 + "</div>";
 
         List<TodoItem> todoItems = Repository.getTodoItems(user);
         for (TodoItem todoItem : todoItems) {
-            html += "<div class='col-lg-10'>"
-                    + "<a href='?id=" + todoItem.getId() + "'>"
+            html += "<div class='container'>"
+                    + "<div class='col-md-12'>"
                     + escapeHtml4(todoItem.getTodo())
-                    + "</a>"
-                    + "<a href='?id=" + todoItem.getId() + "&delete=true'> [x]</a>"
+                    + "<a href='?id=" + todoItem.getId() + "'> [edit]</a>"
+                    + "<a href='?id=" + todoItem.getId() + "&delete=true'> [delete]</a>"
+                    + "</div>"
                     + "</div>";
         }
 
